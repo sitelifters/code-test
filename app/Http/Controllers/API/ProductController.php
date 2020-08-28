@@ -45,6 +45,11 @@ class ProductController extends Controller
         // Validate the data
         $data = $this->validateProductRequest($request);
 
+        // If an image file is present, upload it and get the file path.
+        if ($request->has('image')) {
+            $data['image'] = $request->file('image')->store('images');
+        }
+
         // Add the product to the database
         $product = Product::create($data);
 
@@ -75,6 +80,11 @@ class ProductController extends Controller
     {
         // Validate the data
         $data = $this->validateProductRequest($request);
+
+        // If an image file is present, upload it and get the file path.
+        if ($request->has('image')) {
+            $data['image'] = $request->file('image')->store('images');
+        }
 
         // Update the product
         $product->update($data);
@@ -139,6 +149,29 @@ class ProductController extends Controller
     }
 
 
+
+    /**
+     * Upload an image to the specified product.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Product  $product
+     * @return \Illuminate\Http\Response
+     */
+    public function uploadImage(Request $request, Product $product)
+    {
+        // Validate the image
+        $data = $request->validate([
+            'image' => 'required|mimes:jpg,jpeg,png,svg,gif'
+        ]);
+
+        // Store the image file and update the image path in the DB
+        $image_path = $request->file('image')->store('images');
+        $product->update(['image' => $image_path]);
+
+        return response()->json(['message' => 'Product image successfully uploaded!']);
+    }
+
+
     /**
      * Validate a product request and return the validated data.
      */
@@ -149,7 +182,7 @@ class ProductController extends Controller
             'name' => 'required|max:255',
             'description' => 'required',
             'price' => 'required|integer',
-            'image' => 'sometimes|max:255', // only validate when present
+            'image' => 'sometimes|mimes:jpg,jpeg,png,svg,gif', // only validate when present
         ]);
 
         return $data;

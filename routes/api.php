@@ -43,6 +43,9 @@ Route::middleware(['auth:sanctum'])->group(function() {
 
 		// List all products
 		Route::get('index', 'API\ProductController@index');
+
+		// Upload image to product
+		Route::post('upload-image/{product}', 'API\ProductController@uploadImage');
 	});
 
 });
