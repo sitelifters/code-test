@@ -17,6 +17,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Auth::routes(['register' => false]); // Don't let users register
 
 Route::get('/home', 'HomeController@index')->name('home');
