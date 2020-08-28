@@ -46,4 +46,12 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Product', 'users_products');
     }
 
+    /**
+     * The subscriptions that belong to the user.
+     */
+    public function subscriptions()
+    {
+        return $this->belongsToMany('App\Subscription', 'users_subscriptions');
+    }
+
 }
