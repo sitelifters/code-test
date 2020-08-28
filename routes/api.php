@@ -31,6 +31,18 @@ Route::middleware(['auth:sanctum'])->group(function() {
 
 		// Delete a product
 		Route::delete('delete/{product}', 'API\ProductController@delete');
+
+		// Attach product to user
+		Route::post('attach/{product}', 'API\ProductController@attach');
+
+		// Remove product from user
+		Route::post('detach/{product}', 'API\ProductController@detach');
+
+		// List products attached to user
+		Route::get('user-index', 'API\ProductController@userIndex');
+
+		// List all products
+		Route::get('index', 'API\ProductController@index');
 	});
 
 });
