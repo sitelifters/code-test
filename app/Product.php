@@ -14,4 +14,14 @@ class Product extends Model
 	 */
 	protected $guarded = [];
 	
+
+    /**
+     * The users that are subscribed to this subscription.
+     */
+    public function users()
+    {
+        return $this->belongsToMany('App\User');
+    }
+
+
 }

@@ -37,4 +37,13 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * The products that belong to the user.
+     */
+    public function products()
+    {
+        return $this->belongsToMany('App\Product', 'users_products');
+    }
+
 }
