@@ -14,6 +14,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+// Ensure that all product API requests have a valid API token (using Sanctum middleware)
+Route::middleware(['auth:sanctum'])->group(function() {
+
+	// Group all product-related routes together
+	Route::group(['prefix' => 'product'], function() 
+	{
+		// Create a new product
+		Route::post('create', 'API\ProductController@create');
+
+		// Get a product
+		Route::get('show/{product}', 'API\ProductController@show');
+
+		// Update a product
+		Route::put('update/{product}', 'API\ProductController@update');
+
+		// Delete a product
+		Route::delete('delete/{product}', 'API\ProductController@delete');
+	});
+
 });
