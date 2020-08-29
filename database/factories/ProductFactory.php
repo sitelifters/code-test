@@ -19,7 +19,7 @@ use Illuminate\Support\Str;
 
 $factory->define(Product::class, function (Faker $faker) {
     return [
-        'name' => $faker->word,
+        'name' => ucfirst($faker->word),
         'description' => $faker->sentence,
         'price' => $faker->numberBetween(1, 100),
         'image' => $faker->imageUrl(200, 200),

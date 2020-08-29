@@ -19,6 +19,6 @@ use Illuminate\Support\Str;
 
 $factory->define(Subscription::class, function (Faker $faker) {
     return [
-        'name' => $faker->word,
+        'name' => 'Fake Subscription Plan',
     ];
 });
