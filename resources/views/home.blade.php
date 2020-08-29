@@ -3,9 +3,9 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-10">
             <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+                <div class="card-header">API Tokens</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -28,6 +28,37 @@
             </div>
         </div>
     </div>
+
+    <div class="row justify-content-center mt-4">
+        <div class="col-md-10">
+            <div class="card">
+                <div class="card-header">Products</div>
+
+                <div class="card-body">
+                    @isset($products)
+                        @foreach ($products->chunk(3) as $products_chunk)
+                            <div class="row mb-3">
+                                @foreach ($products_chunk as $product)
+                                    <div class="col-4">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h5 class="card-title">{{ $product->name }}</h5>
+                                                <p class="card-text">{{ $product->description }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        @endforeach
+                    @else
+                        No products found.
+                    @endisset
+
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 @endsection
 
