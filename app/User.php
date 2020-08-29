@@ -54,4 +54,16 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Subscription', 'users_subscriptions');
     }
 
+    /**
+     * Get the user's full name.
+     *
+     * @param  string  $value
+     * @return string
+     */
+    public function getFullNameAttribute($value)
+    {
+        return $this->attributes['first_name'] . ' ' . $this->attributes['last_name'];
+    }
+
+
 }
