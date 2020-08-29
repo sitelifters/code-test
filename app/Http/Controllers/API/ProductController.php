@@ -65,7 +65,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        return response()->json(['message' => 'Product found!', 'product' => $product]);
+        return response()->json(['product' => $product]);
     }
 
 
@@ -121,7 +121,7 @@ class ProductController extends Controller
 
         // Only allow product to be attached to user if the user has an active subscription.
         if (!$user->subscriptions->count()) {
-            return response()->json(['message' => 'Product could not be attached. User does not have an active subscription.']);
+            return response()->json(['message' => 'Product could not be attached.', 'error' => 'User does not have an active subscription.'], 403);
         }
 
         // Attach this product to the user if it's not already (without detaching any other products)
@@ -179,8 +179,8 @@ class ProductController extends Controller
     {
         // Validate the data
         $data = $request->validate([
-            'name' => 'required|max:255',
-            'description' => 'required',
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
             'price' => 'required|integer',
             'image' => 'sometimes|mimes:jpg,jpeg,png,svg,gif', // only validate when present
         ]);
