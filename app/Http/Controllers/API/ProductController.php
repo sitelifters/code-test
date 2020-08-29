@@ -9,6 +9,7 @@ use Auth;
 
 class ProductController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      *
@@ -187,7 +188,5 @@ class ProductController extends Controller
 
         return $data;
     }
-
-
 
 }
