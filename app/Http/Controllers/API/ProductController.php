@@ -121,7 +121,7 @@ class ProductController extends Controller
 
         // Only allow product to be attached to user if the user has an active subscription.
         if (!$user->subscriptions->count()) {
-            return response()->json(['message' => 'Product could not be attached.', 'error' => 'User does not have an active subscription.'], 403);
+            return response()->json(['status' => 'error', 'message' => 'Product could not be attached. User does not have an active subscription.'], 403);
         }
 
         // Attach this product to the user if it's not already (without detaching any other products)
