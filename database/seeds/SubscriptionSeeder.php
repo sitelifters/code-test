@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Subscription;
 use App\User;
 
 class SubscriptionSeeder extends Seeder
@@ -13,10 +12,10 @@ class SubscriptionSeeder extends Seeder
      */
     public function run()
     {
-    	// Create some subscription plans.
-    	$subscription = Subscription::updateOrCreate(['name' => 'Subscription Plan A']);
+    	// Create a subscription plan
+    	$subscription = factory(App\Subscription::class)->create();
 
-    	// Attach subscription to 3 random users.
+    	// Attach subscription to 3 random users
     	$users = User::inRandomOrder()->limit(3)->get();
     	foreach ($users as $user) {
     		$user->subscriptions()->attach($subscription->id);
